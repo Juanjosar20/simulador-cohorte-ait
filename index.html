@@ -22,7 +22,7 @@ ul{margin:10px 0 0;padding-left:20px;color:#E4E4DE;line-height:1.7;font-size:16p
 table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}td,th{padding:9px 6px;border-bottom:1px solid var(--b);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--m);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 tr.on td{color:var(--l);font-weight:700}
 .ms{margin-top:22px}.tr{height:10px;background:#2A2A2A;border-radius:99px;overflow:hidden}.tr i{display:block;height:100%;background:var(--l);border-radius:99px;transition:width .2s}
-.hs{display:flex;justify-content:space-between;gap:16px;margin-top:12px}.h{max-width:48%;opacity:.45}.h.on{opacity:1}.h:last-child{text-align:right}
+.hs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}.h{opacity:.45}.h.on{opacity:1}.h:last-child{text-align:right}
 .h b{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--l)}.h b:before{content:'Hito · '}.h b:after{content:' personas'}.h span{font-size:15px;color:#E4E4DE}
 .h.on b:before{content:'✓ Hito · '}
 .f{font-size:13px;color:#7A7A74;margin-top:22px}
@@ -55,25 +55,26 @@ tr.on td{color:var(--l);font-weight:700}
   <div class="st"><span>Valor de todo lo incluido</span><b id="val"></b></div>
  </div>
  <div class="ms"><div class="tr"><i id="fill"></i></div>
-  <div class="hs"><div class="h" id="h12"><b>12</b><span>2 sesiones privadas + programa completo</span></div><div class="h" id="h25"><b>25</b><span>+2 sesiones y Second Brain para cada uno</span></div></div></div>
+  <div class="hs"><div class="h" id="h12"><b>12</b><span>Programa completo + 2 sesiones</span></div><div class="h" id="h15"><b>15</b><span>3 Second Brains</span></div><div class="h" id="h20"><b>20</b><span>5 Second Brains</span></div><div class="h" id="h25"><b>25</b><span>8 Second Brains + 2 sesiones más</span></div></div></div>
  <div id="bon"></div>
  <ul id="inc"></ul>
  <p class="nx" id="nx"></p>
 </div>
 <div class="box"><div class="k" style="color:#B5B5AE">Referencia</div>
-<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Sesiones privadas</th></tr></thead><tbody id="tb"></tbody></table></div>
-<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (cada una como una sesión del programa: USD 2.500 ÷ 8 = USD 312,5 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y, con 25 personas, la implementación del Second Brain (USD 1.000 por persona).</p>
+<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Sesiones · Second Brains</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (cada una como una sesión del programa: USD 2.500 ÷ 8 = USD 312,5 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 1.000 cada una).</p>
 </main>
 <script>
 const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
 const pp=n=>n<=15?2000:(n>=25?1749:2000-(n-15)*25), ses=n=>n>=25?4:2;
-const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+(n>=25?n*1000:0);
+const sbn=n=>n>=25?8:n>=20?5:n>=15?3:0;
+const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*1000;
 function draw(n){n=+n;document.getElementById('n').textContent=n;
  const p=pp(n),t=n*p;document.getElementById('pp').textContent=f(p);document.getElementById('tot').textContent=f(t);
  document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
- document.getElementById('bon').innerHTML=n>=25?'<span class="bono">Hito de 25 desbloqueado: Second Brain para cada participante + 2 sesiones privadas más</span>':'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';document.getElementById('h12').classList.add('on');document.getElementById('h25').classList.toggle('on',n>=25);
- document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',ses(n)+' sesiones privadas con Pablo Guzzi y José Oberto','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(n>=25?['Implementación del Second Brain de cada participante']:[]).map(x=>'<li>'+x+'</li>').join('');
- document.getElementById('nx').innerHTML=n<25?`Con <b>${25-n}</b> ${25-n===1?'persona':'personas'} más llegan al hito de 25: USD 1.749 por persona y se desbloquean 2 sesiones privadas más y el Second Brain de cada participante.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
- document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${ses(m)}${m>=25?' + Second Brain':''}</td></tr>`).join('')}
+ document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + 2 sesiones privadas más':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
+ document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',ses(n)+' sesiones privadas con Pablo Guzzi y José Oberto','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
+ const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 2 sesiones privadas más y USD 1.749 por persona']],nh=H.find(([h])=>n<h);document.getElementById('nx').innerHTML=nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
+ document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${ses(m)}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
 const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
 </script></body></html>
