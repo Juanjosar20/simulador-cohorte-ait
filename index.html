@@ -1,0 +1,63 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Simulador · Cohorte AbbVie · 30X</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--l:#E9FF7B;--bg:#0A0A0A;--c:#151515;--b:#2A2A2A;--m:#B5B5AE}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#F2F2EC;font-family:Inter,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:48px 20px 64px}
+.k{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--l)}
+h1{font-size:clamp(30px,5vw,52px);letter-spacing:-.04em;line-height:1.05;margin:10px 0 12px}h1 em{font-style:normal;color:var(--l)}
+p{color:var(--m);font-size:17px;line-height:1.5;margin:0}
+.box{background:var(--c);border:1px solid var(--b);border-radius:22px;padding:26px;margin-top:28px}
+.row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+input[type=range]{flex:1;min-width:220px;accent-color:#E9FF7B;height:28px}
+.n{font-size:56px;font-weight:800;letter-spacing:-.04em;color:var(--l);min-width:90px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.st{background:#0F0F0F;border:1px solid var(--b);border-radius:16px;padding:18px}
+.st span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+.st b{display:block;font-size:34px;letter-spacing:-.03em;margin-top:8px}.st.on{background:var(--l);border-color:var(--l);color:#0A0A0A}.st.on span{color:#0A0A0A}
+ul{margin:10px 0 0;padding-left:20px;color:#E4E4DE;line-height:1.7;font-size:16px}
+.bono{display:inline-block;background:var(--l);color:#0A0A0A;font-weight:800;font-size:13px;border-radius:99px;padding:5px 12px;margin-top:14px}
+.nx{margin-top:16px;color:#E4E4DE}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}td,th{padding:9px 6px;border-bottom:1px solid var(--b);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--m);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+tr.on td{color:var(--l);font-weight:700}
+.ms{margin-top:22px}.tr{height:10px;background:#2A2A2A;border-radius:99px;overflow:hidden}.tr i{display:block;height:100%;background:var(--l);border-radius:99px;transition:width .2s}
+.hs{display:flex;justify-content:space-between;gap:16px;margin-top:12px}.h{max-width:48%;opacity:.45}.h.on{opacity:1}.h:last-child{text-align:right}
+.h b{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--l)}.h b:before{content:'Hito · '}.h b:after{content:' personas'}.h span{font-size:15px;color:#E4E4DE}
+.h.on b:before{content:'✓ Hito · '}
+.f{font-size:13px;color:#7A7A74;margin-top:22px}
+</style></head><body><main>
+<div class="k">Propuesta AbbVie · AI Transformation · precio Black November hasta el 30 de noviembre</div>
+<h1>Entre más son, <em>menos paga cada uno y más se desbloquea</em>.</h1>
+<p>Mueve el número de participantes y mira el precio por persona, la inversión total y lo que incluye. USD 2.000 por persona hasta 15; desde la persona 16, el precio de todos baja USD 25 por persona, hasta USD 1.749 con 25. Al llegar a cada hito se desbloquean bonos. Precio de lista: USD 2.500.</p>
+<div class="box">
+ <div class="row"><div class="n" id="n">15</div><input type="range" id="r" min="12" max="25" value="15" aria-label="Participantes"></div>
+ <div class="g">
+  <div class="st on"><span>Por persona</span><b id="pp"></b></div>
+  <div class="st"><span>Inversión total</span><b id="tot"></b></div>
+  <div class="st"><span>Ahorro vs. precio de lista</span><b id="ah"></b></div>
+  <div class="st"><span>Valor de todo lo incluido</span><b id="val"></b></div>
+ </div>
+ <div class="ms"><div class="tr"><i id="fill"></i></div>
+  <div class="hs"><div class="h" id="h12"><b>12</b><span>2 sesiones privadas + programa completo</span></div><div class="h" id="h25"><b>25</b><span>+2 sesiones y Second Brain para cada uno</span></div></div></div>
+ <div id="bon"></div>
+ <ul id="inc"></ul>
+ <p class="nx" id="nx"></p>
+</div>
+<div class="box"><div class="k" style="color:#B5B5AE">Referencia</div>
+<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Sesiones privadas</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (USD 3.000 cada una), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y, con 25 personas, la implementación del Second Brain (USD 1.000 por persona).</p>
+</main>
+<script>
+const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
+const pp=n=>n<=15?2000:(n>=25?1749:2000-(n-15)*25), ses=n=>n>=25?4:2;
+const valor=n=>n*2500+5000+ses(n)*3000+6000+(n>=25?n*1000:0);
+function draw(n){n=+n;document.getElementById('n').textContent=n;
+ const p=pp(n),t=n*p;document.getElementById('pp').textContent=f(p);document.getElementById('tot').textContent=f(t);
+ document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
+ document.getElementById('bon').innerHTML=n>=25?'<span class="bono">Hito de 25 desbloqueado: Second Brain para cada participante + 2 sesiones privadas más</span>':'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';document.getElementById('h12').classList.add('on');document.getElementById('h25').classList.toggle('on',n>=25);
+ document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',ses(n)+' sesiones privadas con Pablo Guzzi y José Oberto','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(n>=25?['Implementación del Second Brain de cada participante']:[]).map(x=>'<li>'+x+'</li>').join('');
+ document.getElementById('nx').innerHTML=n<25?`Con <b>${25-n}</b> ${25-n===1?'persona':'personas'} más llegan al hito de 25: USD 1.749 por persona y se desbloquean 2 sesiones privadas más y el Second Brain de cada participante.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
+ document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${ses(m)}${m>=25?' + Second Brain':''}</td></tr>`).join('')}
+const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
+</script></body></html>
