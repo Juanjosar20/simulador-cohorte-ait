@@ -82,26 +82,26 @@ td,th{white-space:nowrap}
   <div class="st"><span>Valor de todo lo incluido</span><b id="val"></b></div>
  </div>
  <div class="ms"><div class="tr"><i id="fill"></i></div>
-  <div class="hs"><div class="h" id="h12"><b>12</b><span>Programa completo + 3 h de mentoría</span></div><div class="h" id="h15"><b>15</b><span>3 Second Brains</span></div><div class="h" id="h20"><b>20</b><span>5 Second Brains</span></div><div class="h" id="h25"><b>25</b><span>8 Second Brains + 6 h de mentoría</span></div></div></div>
+  <div class="hs"><div class="h" id="h12"><b>12</b><span>Programa + 3 h de mentoría + 1 Second Brain</span></div><div class="h" id="h15"><b>15</b><span>2 Second Brains</span></div><div class="h" id="h20"><b>20</b><span>3 Second Brains</span></div><div class="h" id="h25"><b>25</b><span>5 Second Brains + 6 h de mentoría</span></div></div></div>
  <div id="bon"></div>
  <ul id="inc"></ul>
  <p class="nx" id="nx"></p>
 </div>
 <div class="box"><div class="k" style="color:#B5B5AE">Referencia · SB = implementaciones de Second Brain</div>
 <div class="tw"><table><thead><tr><th>Personas</th><th>USD c/u</th><th>USD total</th><th>Mentoría · SB</th></tr></thead><tbody id="tb"></tbody></table></div></div>
-<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), la mentoría privada (valorada en sesiones del programa: 1 h 30 min = 1 sesión = USD 312,5 por persona; 3 horas = USD 625 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 1.000 cada una).</p>
+<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), la mentoría privada (valorada en sesiones del programa: 1 h 30 min = 1 sesión = USD 312,5 por persona; 3 horas = USD 625 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 2.000 cada una).</p>
 </main>
 <script>
 const g=v=>Math.round(v).toLocaleString('es-CO');const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
 const PR={16:1993,17:1982,18:1967,19:1948,20:1925,21:1898,22:1867,23:1832,24:1793,25:1749};const pp=n=>n<=15?2000:PR[Math.min(n,25)], ses=n=>n>=25?4:2;
-const sbn=n=>n>=25?8:n>=20?5:n>=15?3:0;
-const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*1000;
+const sbn=n=>n>=25?5:n>=20?3:n>=15?2:1;
+const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*2000;
 function draw(n){n=+n;document.getElementById('n').textContent=n;
  const p=pp(n),t=n*p;document.getElementById('pp').textContent=f(p);document.getElementById('tot').textContent=f(t);
  document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
- document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + la mentoría privada se duplica a 6 horas':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
- document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, mentorías grupales / Q&A con Daniel Rabinovich, CTO y COO de Mercado Libre',(n>=25?'6 horas':'3 horas')+' de mentoría privada con Pablo Guzzi y José Oberto (equivale a '+ses(n)+' sesiones del programa, USD '+(n>=25?'1.250':'625')+' por persona)','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
- const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 6 horas de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);const mg=(n>=15&&n<25)?`Sumar a una persona más cuesta solo <b>${f((n+1)*pp(n+1)-n*pp(n))}</b> y baja el precio de todos. `:'';document.getElementById('nx').innerHTML=mg+(nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.');
+ document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} ${sbn(n)===1?'implementación':'implementaciones'} de Second Brain${n>=25?' + la mentoría privada se duplica a 6 horas':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
+ document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, mentorías grupales / Q&A con Daniel Rabinovich, CTO y COO de Mercado Libre',(n>=25?'6 horas':'3 horas')+' de mentoría privada con Pablo Guzzi y José Oberto (equivale a '+ses(n)+' sesiones del programa, USD '+(n>=25?'1.250':'625')+' por persona)','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+(sbn(n)===1?' implementación':' implementaciones')+' de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
+ const H=[[15,'2 implementaciones de Second Brain'],[20,'3 implementaciones de Second Brain'],[25,'5 Second Brains, 6 horas de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);const mg=(n>=15&&n<25)?`Sumar a una persona más cuesta solo <b>${f((n+1)*pp(n+1)-n*pp(n))}</b> y baja el precio de todos. `:'';document.getElementById('nx').innerHTML=mg+(nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.');
  document.getElementById('tb').innerHTML=[12,15,16,18,20,22,24,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${g(pp(m))}</td><td>${g(m*pp(m))}</td><td>${m>=25?'6 h':'3 h'}${sbn(m)?' · '+sbn(m)+' SB':''}</td></tr>`).join('')}
 const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
 </script></body></html>
