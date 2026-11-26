@@ -35,6 +35,26 @@ th:first-child,td:first-child{text-align:left}td{padding:9px 8px;border-radius:7
 .note{font-size:12px;color:var(--mut);margin-top:12px}
 .ask{margin-top:14px;display:flex;gap:8px}.ask input{flex:1;border:1px solid var(--line);border-radius:99px;padding:10px 14px;font-size:13px}.ask button{background:var(--navy);color:#fff;border:0;border-radius:99px;padding:0 16px;font-weight:600}
 .q{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.q span{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:5px 10px;color:var(--mut)}
+
+html,body{overflow-x:hidden}
+@media (max-width:820px){
+ .app{grid-template-columns:1fr}
+ aside{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px;padding:14px 16px}
+ .brand{margin:0 12px 0 0;width:100%}
+ aside a{font-size:12px;padding:6px 9px}
+ aside .foot{display:none}
+ main{padding:18px 16px}
+ h1{font-size:20px}
+ .top{flex-direction:column;gap:10px}
+ .filters{flex-wrap:wrap}
+ .kpis{grid-template-columns:1fr 1fr;gap:10px}
+ .k b{font-size:26px}
+ .g2{grid-template-columns:1fr}
+ .lv .r{grid-template-columns:110px 1fr 32px;font-size:12px}
+ table{font-size:12px}td{padding:7px 4px}
+ .proc .p{grid-template-columns:1fr auto;}
+ .proc .p .chip{display:none}
+}
 </style></head><body>
 <div class="app">
 <aside>

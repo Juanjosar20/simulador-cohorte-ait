@@ -26,6 +26,33 @@ tr.on td{color:var(--l);font-weight:700}
 .h b{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--l)}.h b:before{content:'Hito · '}.h b:after{content:' personas'}.h span{font-size:15px;color:#E4E4DE}
 .h.on b:before{content:'✓ Hito · '}
 .f{font-size:13px;color:#7A7A74;margin-top:22px}
+
+html,body{overflow-x:hidden}
+td,th{white-space:nowrap}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+ main{padding:28px 16px 48px}
+ .k{font-size:11px;letter-spacing:.12em}
+ h1{font-size:30px;margin:8px 0 10px}
+ p{font-size:15px}
+ .box{padding:18px;border-radius:18px;margin-top:20px}
+ .row{position:sticky;top:0;z-index:5;background:var(--c);margin:-18px -18px 0;padding:14px 18px;border-radius:18px 18px 0 0;gap:12px;flex-wrap:nowrap}
+ .n{font-size:40px;min-width:56px}
+ input[type=range]{min-width:0}
+ .g{grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+ .st{padding:12px}
+ .st span{font-size:10px;letter-spacing:.1em}
+ .st b{font-size:21px;margin-top:6px}
+ .hs{grid-template-columns:1fr 1fr;gap:10px 12px}
+ .h:last-child{text-align:left}
+ .h b{font-size:11px;letter-spacing:.1em}
+ .h span{font-size:13px}
+ .bono{font-size:12px}
+ ul{font-size:14px;line-height:1.55;padding-left:18px}
+ .nx{font-size:14px}
+ table{font-size:13px}td,th{padding:8px 5px}th{font-size:10px;letter-spacing:.08em}
+ .f{font-size:12px}
+}
 </style></head><body> <main><div style="display:flex;align-items:center;gap:16px;margin-bottom:26px"><div style="width:96px;line-height:0">
 <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 371.23">
   <defs>
@@ -60,12 +87,12 @@ tr.on td{color:var(--l);font-weight:700}
  <ul id="inc"></ul>
  <p class="nx" id="nx"></p>
 </div>
-<div class="box"><div class="k" style="color:#B5B5AE">Referencia</div>
-<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Mentoría · Second Brains</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="box"><div class="k" style="color:#B5B5AE">Referencia · SB = implementaciones de Second Brain</div>
+<div class="tw"><table><thead><tr><th>Personas</th><th>USD c/u</th><th>USD total</th><th>Mentoría · SB</th></tr></thead><tbody id="tb"></tbody></table></div></div>
 <p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), la mentoría privada (valorada en sesiones del programa: 1 h 30 min = 1 sesión = USD 312,5 por persona; 3 horas = USD 625 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 1.000 cada una).</p>
 </main>
 <script>
-const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
+const g=v=>Math.round(v).toLocaleString('es-CO');const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
 const PR={16:1993,17:1982,18:1967,19:1948,20:1925,21:1898,22:1867,23:1832,24:1793,25:1749};const pp=n=>n<=15?2000:PR[Math.min(n,25)], ses=n=>n>=25?4:2;
 const sbn=n=>n>=25?8:n>=20?5:n>=15?3:0;
 const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*1000;
@@ -75,6 +102,6 @@ function draw(n){n=+n;document.getElementById('n').textContent=n;
  document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + la mentoría privada se duplica a 6 horas':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
  document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, mentorías grupales / Q&A con Daniel Rabinovich, CTO y COO de Mercado Libre',(n>=25?'6 horas':'3 horas')+' de mentoría privada con Pablo Guzzi y José Oberto (equivale a '+ses(n)+' sesiones del programa, USD '+(n>=25?'1.250':'625')+' por persona)','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
  const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 6 horas de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);const mg=(n>=15&&n<25)?`Sumar a una persona más cuesta solo <b>${f((n+1)*pp(n+1)-n*pp(n))}</b> y baja el precio de todos. `:'';document.getElementById('nx').innerHTML=mg+(nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.');
- document.getElementById('tb').innerHTML=[12,15,16,18,20,22,24,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${m>=25?'6 h':'3 h'}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
+ document.getElementById('tb').innerHTML=[12,15,16,18,20,22,24,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${g(pp(m))}</td><td>${g(m*pp(m))}</td><td>${m>=25?'6 h':'3 h'}${sbn(m)?' · '+sbn(m)+' SB':''}</td></tr>`).join('')}
 const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
 </script></body></html>
