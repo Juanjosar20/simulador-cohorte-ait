@@ -55,14 +55,14 @@ tr.on td{color:var(--l);font-weight:700}
   <div class="st"><span>Valor de todo lo incluido</span><b id="val"></b></div>
  </div>
  <div class="ms"><div class="tr"><i id="fill"></i></div>
-  <div class="hs"><div class="h" id="h12"><b>12</b><span>Programa completo + 2 sesiones</span></div><div class="h" id="h15"><b>15</b><span>3 Second Brains</span></div><div class="h" id="h20"><b>20</b><span>5 Second Brains</span></div><div class="h" id="h25"><b>25</b><span>8 Second Brains + 2 sesiones más</span></div></div></div>
+  <div class="hs"><div class="h" id="h12"><b>12</b><span>Programa completo + 2 h 30 de mentoría</span></div><div class="h" id="h15"><b>15</b><span>3 Second Brains</span></div><div class="h" id="h20"><b>20</b><span>5 Second Brains</span></div><div class="h" id="h25"><b>25</b><span>8 Second Brains + 2 h 30 más</span></div></div></div>
  <div id="bon"></div>
  <ul id="inc"></ul>
  <p class="nx" id="nx"></p>
 </div>
 <div class="box"><div class="k" style="color:#B5B5AE">Referencia</div>
-<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Sesiones · Second Brains</th></tr></thead><tbody id="tb"></tbody></table></div>
-<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (cada una como una sesión del programa: USD 2.500 ÷ 8 = USD 312,5 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 1.000 cada una).</p>
+<table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Mentoría · Second Brains</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), la mentoría privada (valorada en sesiones del programa: 1 h 15 min ≈ 1 sesión = USD 312,5 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y las implementaciones de Second Brain que se desbloquean (USD 1.000 cada una).</p>
 </main>
 <script>
 const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
@@ -72,9 +72,9 @@ const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*1000;
 function draw(n){n=+n;document.getElementById('n').textContent=n;
  const p=pp(n),t=n*p;document.getElementById('pp').textContent=f(p);document.getElementById('tot').textContent=f(t);
  document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
- document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + 2 sesiones privadas más':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
- document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',ses(n)+' sesiones privadas con Pablo Guzzi y José Oberto','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
- const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 2 sesiones privadas más y USD 1.749 por persona']],nh=H.find(([h])=>n<h);document.getElementById('nx').innerHTML=nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
- document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${ses(m)}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
+ document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + 2 h 30 más de mentoría privada':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
+ document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',(n>=25?'5 horas':'2 h 30 min')+' de mentoría privada con Pablo Guzzi y José Oberto (equivale a '+ses(n)+' sesiones del programa)','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
+ const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 2 h 30 más de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);document.getElementById('nx').innerHTML=nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
+ document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${m>=25?'5 h':'2 h 30'}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
 const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
 </script></body></html>
