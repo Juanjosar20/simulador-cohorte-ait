@@ -62,12 +62,12 @@ tr.on td{color:var(--l);font-weight:700}
 </div>
 <div class="box"><div class="k" style="color:#B5B5AE">Referencia</div>
 <table><thead><tr><th>Participantes</th><th>Por persona</th><th>Total</th><th>Sesiones privadas</th></tr></thead><tbody id="tb"></tbody></table></div>
-<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (USD 3.000 cada una), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y, con 25 personas, la implementación del Second Brain (USD 1.000 por persona).</p>
+<p class="f">Valores en dólares, sin IVA; facturados en pesos a la TRM del día de emisión. El valor de lo incluido suma cada pieza por aparte: el programa a precio de lista, el diagnóstico (USD 5.000), las sesiones privadas con los mentores (cada una como una sesión del programa: USD 2.500 ÷ 8 = USD 312,5 por persona), el seguimiento 30-60-90 con revisión del plan de acción (3 sesiones a USD 2.000) y, con 25 personas, la implementación del Second Brain (USD 1.000 por persona).</p>
 </main>
 <script>
 const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
 const pp=n=>n<=15?2000:(n>=25?1749:2000-(n-15)*25), ses=n=>n>=25?4:2;
-const valor=n=>n*2500+5000+ses(n)*3000+6000+(n>=25?n*1000:0);
+const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+(n>=25?n*1000:0);
 function draw(n){n=+n;document.getElementById('n').textContent=n;
  const p=pp(n),t=n*p;document.getElementById('pp').textContent=f(p);document.getElementById('tot').textContent=f(t);
  document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
