@@ -45,7 +45,7 @@ tr.on td{color:var(--l);font-weight:700}
 </svg></div><span style="color:#7A7A74;font-size:24px">×</span><img src="abbvie-blanco.svg" alt="AbbVie" style="height:22px"></div>
 <div class="k">Propuesta AbbVie · AI Transformation · precio Black November hasta el 30 de noviembre</div>
 <h1>Entre más son, <em>menos paga cada uno y más se desbloquea</em>.</h1>
-<p>Mueve el número de participantes y mira el precio por persona, la inversión total y lo que incluye. USD 2.000 por persona hasta 15; desde la persona 16, el precio de todos baja USD 25 por persona, hasta USD 1.749 con 25. Al llegar a cada hito se desbloquean bonos. Precio de lista: USD 2.500.</p>
+<p>Mueve el número de participantes y mira el precio por persona, la inversión total y lo que incluye. USD 2.000 por persona hasta 15; desde la persona 16 el precio de todos baja, y cada persona que se suma lo baja más que la anterior, hasta USD 1.749 con 25. Al llegar a cada hito se desbloquean bonos. Precio de lista: USD 2.500.</p>
 <div class="box">
  <div class="row"><div class="n" id="n">15</div><input type="range" id="r" min="12" max="25" value="15" aria-label="Participantes"></div>
  <div class="g">
@@ -66,7 +66,7 @@ tr.on td{color:var(--l);font-weight:700}
 </main>
 <script>
 const f=v=>'USD '+Math.round(v).toLocaleString('es-CO');
-const pp=n=>n<=15?2000:(n>=25?1749:2000-(n-15)*25), ses=n=>n>=25?4:2;
+const PR={16:1993,17:1982,18:1967,19:1948,20:1925,21:1898,22:1867,23:1832,24:1793,25:1749};const pp=n=>n<=15?2000:PR[Math.min(n,25)], ses=n=>n>=25?4:2;
 const sbn=n=>n>=25?8:n>=20?5:n>=15?3:0;
 const valor=n=>n*2500+5000+ses(n)*n*312.5+6000+sbn(n)*1000;
 function draw(n){n=+n;document.getElementById('n').textContent=n;
@@ -74,7 +74,7 @@ function draw(n){n=+n;document.getElementById('n').textContent=n;
  document.getElementById('ah').textContent=f(n*2500-t);document.getElementById('val').textContent=f(valor(n));
  document.getElementById('bon').innerHTML=sbn(n)?`<span class="bono">Desbloqueado: ${sbn(n)} implementaciones de Second Brain${n>=25?' + la mentoría privada se duplica a 6 horas':''}</span>`:'';document.getElementById('fill').style.width=((n-12)/13*100)+'%';[12,15,20,25].forEach(h=>document.getElementById('h'+h).classList.toggle('on',n>=h));
  document.getElementById('inc').innerHTML=['Nivelación previa para todo el equipo','Diagnóstico de AbbVie, por capa y por proceso','AI Transformation: 8 sesiones en vivo, 2 mentorías grupales y Q&A con Daniel Rabinovich',(n>=25?'6 horas':'3 horas')+' de mentoría privada con Pablo Guzzi y José Oberto (equivale a '+ses(n)+' sesiones del programa, USD '+(n>=25?'1.250':'625')+' por persona)','Seguimiento a 30, 60 y 90 días con el director de AI y un mentor'].concat(sbn(n)?[sbn(n)+' implementaciones de Second Brain, para quien elija AbbVie']:[]).map(x=>'<li>'+x+'</li>').join('');
- const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 6 horas de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);document.getElementById('nx').innerHTML=nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.';
- document.getElementById('tb').innerHTML=[12,15,18,20,22,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${m>=25?'6 h':'3 h'}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
+ const H=[[15,'3 implementaciones de Second Brain'],[20,'5 implementaciones de Second Brain'],[25,'8 Second Brains, 6 horas de mentoría privada y USD 1.749 por persona']],nh=H.find(([h])=>n<h);const mg=(n>=15&&n<25)?`Sumar a una persona más cuesta solo <b>${f((n+1)*pp(n+1)-n*pp(n))}</b> y baja el precio de todos. `:'';document.getElementById('nx').innerHTML=mg+(nh?`${nh[0]-n===1?'Falta':'Faltan'} <b>${nh[0]-n}</b> ${nh[0]-n===1?'persona':'personas'} para el siguiente hito: <b>${nh[1]}</b>.`:'Con 25 tienen el mejor precio de la tabla y todos los bonos desbloqueados.');
+ document.getElementById('tb').innerHTML=[12,15,16,18,20,22,24,25].map(m=>`<tr class="${m===n?'on':''}"><td>${m}</td><td>${f(pp(m))}</td><td>${f(m*pp(m))}</td><td>${m>=25?'6 h':'3 h'}${sbn(m)?' · '+sbn(m)+' Second Brains':''}</td></tr>`).join('')}
 const r=document.getElementById('r');r.addEventListener('input',e=>draw(e.target.value));draw(15);
 </script></body></html>
