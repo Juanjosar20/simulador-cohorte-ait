@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Diagnóstico de AI · Equipo médico AbbVie · 30X</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#071D49;--ink:#0F172A;--mut:#5B6478;--line:#E3E7EF;--bg:#F5F7FB;--card:#fff;--l:#E9FF7B;
+--n1:#C2410C;--n2:#F59E0B;--n3:#3B82F6;--n4:#16A34A}
+*{box-sizing:border-box;margin:0}body{font-family:Inter,sans-serif;background:var(--bg);color:var(--ink)}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#fff;padding:22px 18px;display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:22px}.brand img{height:16px}.brand span{color:#8FA0C4;font-size:14px}.brand b{font-size:17px;letter-spacing:-.02em}
+aside a{color:#C9D3EA;text-decoration:none;font-size:14px;padding:9px 12px;border-radius:8px}aside a.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+aside .foot{margin-top:auto;font-size:12px;color:#8FA0C4;line-height:1.5}
+main{padding:26px 32px}
+.top{display:flex;justify-content:space-between;align-items:flex-start}
+h1{font-size:24px;letter-spacing:-.02em}.sub{color:var(--mut);font-size:14px;margin-top:4px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:#FFF7D6;color:#8A6D00;border-radius:99px;padding:5px 10px}
+.filters{display:flex;gap:10px;margin-top:18px}.f{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px}.f small{display:block;color:var(--mut);font-size:11px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.k .lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}.k b{display:block;font-size:34px;letter-spacing:-.03em;margin-top:8px}.k p{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.4}
+.g2{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:14px}
+h3{font-size:15px;letter-spacing:-.01em}.h3s{font-size:12.5px;color:var(--mut);margin-top:3px}
+.lv{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.lv .r{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:10px;font-size:13px}
+.bar{height:14px;background:#EEF1F6;border-radius:99px;display:flex;overflow:hidden}.bar i{display:block;height:100%}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-top:12px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:separate;border-spacing:4px;margin-top:10px;font-size:13px}th{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);text-align:center;padding:4px}
+th:first-child,td:first-child{text-align:left}td{padding:9px 8px;border-radius:7px;text-align:center;font-weight:700}td:first-child{font-weight:500;padding-left:0}
+.c1{background:#FDE2D3;color:#9A3412}.c2{background:#FEF0C7;color:#92400E}.c3{background:#DBEAFE;color:#1E40AF}.c4{background:#DCFCE7;color:#166534}
+.proc{display:flex;flex-direction:column;gap:9px;margin-top:12px}.proc .p{display:grid;grid-template-columns:1fr 120px 82px;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13px}
+.proc .p b{font-weight:600}.proc small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.chip{font-size:11px;font-weight:700;border-radius:99px;padding:4px 9px;text-align:center}.alto{background:#DCFCE7;color:#166534}.medio{background:#FEF0C7;color:#92400E}
+.hrs{font-size:13px;font-weight:700;text-align:right}
+.note{font-size:12px;color:var(--mut);margin-top:12px}
+.ask{margin-top:14px;display:flex;gap:8px}.ask input{flex:1;border:1px solid var(--line);border-radius:99px;padding:10px 14px;font-size:13px}.ask button{background:var(--navy);color:#fff;border:0;border-radius:99px;padding:0 16px;font-weight:600}
+.q{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.q span{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:5px 10px;color:var(--mut)}
+</style></head><body>
+<div class="app">
+<aside>
+ <div class="brand"><img src="../abbvie-color.svg" style="filter:brightness(0) invert(1)" alt="AbbVie"><span>×</span><b>30X</b></div>
+ <a class="on">Vista general</a><a>Nivel por persona</a><a>Mapa de calor</a><a>Procesos del área médica</a><a>Plan de 90 días</a><a>Seguimiento 30-60-90</a><a>Metodología</a>
+ <div class="foot">Diagnóstico de AI · Equipo médico<br>AbbVie Colombia · 2027<br><br>Datos de muestra · así se vería</div>
+</aside>
+<main>
+ <div class="top"><div><h1>Diagnóstico de AI · Vista general</h1><div class="sub">Equipo médico de AbbVie Colombia · respondido antes del inicio de la cohorte</div></div><span class="tag">Datos de muestra</span></div>
+ <div class="filters"><div class="f"><small>Capa</small>Todas</div><div class="f"><small>Rol</small>Todos</div><div class="f"><small>Área terapéutica</small>Todas</div><div class="f"><small>Corte</small>Línea base · enero 2027</div></div>
+ <div class="kpis">
+  <div class="card k"><div class="lbl">Nivel de AI del equipo</div><b>1,8 <span style="font-size:16px;color:var(--mut)">/ 4</span></b><p>15 personas evaluadas. Meta del plan de 90 días: 2,8.</p></div>
+  <div class="card k"><div class="lbl">Usan AI todos los días</div><b>27 %</b><p>4 de 15 personas. El resto la usa de forma ocasional o nunca.</p></div>
+  <div class="card k"><div class="lbl">Horas administrativas por semana</div><b>18 h</b><p>Promedio de un medical advisor (70 % de su tiempo fuera de campo).</p></div>
+  <div class="card k"><div class="lbl">Mayor brecha</div><b style="font-size:22px;margin-top:12px">Datos y cumplimiento</b><p>Uso de AI con información sensible y herramientas aprobadas.</p></div>
+ </div>
+ <div class="g2">
+  <div class="card"><h3>Nivel de AI por persona</h3><div class="h3s">Escala del diagnóstico AI-first: 1 principiante · 2 usuario · 3 integrador · 4 líder AI-first</div>
+   <div class="lv">
+    <div class="r"><span>Directora médica</span><div class="bar"><i style="width:0%;background:var(--n1)"></i><i style="width:0%;background:var(--n2)"></i><i style="width:100%;background:var(--n3)"></i></div><b>3</b></div>
+    <div class="r"><span>Gerentes (5)</span><div class="bar"><i style="width:20%;background:var(--n1)"></i><i style="width:40%;background:var(--n2)"></i><i style="width:40%;background:var(--n3)"></i></div><b>2,2</b></div>
+    <div class="r"><span>Medical advisors (9)</span><div class="bar"><i style="width:45%;background:var(--n1)"></i><i style="width:44%;background:var(--n2)"></i><i style="width:11%;background:var(--n3)"></i></div><b>1,4</b></div>
+   </div>
+   <div class="legend"><span><i style="background:var(--n1)"></i>Nivel 1</span><span><i style="background:var(--n2)"></i>Nivel 2</span><span><i style="background:var(--n3)"></i>Nivel 3</span><span><i style="background:var(--n4)"></i>Nivel 4</span></div>
+   <h3 style="margin-top:20px">Mapa de calor · capa × capacidad</h3>
+   <table><tr><th>Capacidad</th><th>Directora</th><th>Gerentes</th><th>Advisors</th></tr>
+    <tr><td>Uso diario de AI</td><td class="c3">3,0</td><td class="c2">2,2</td><td class="c1">1,4</td></tr>
+    <tr><td>Análisis de literatura y evidencia</td><td class="c3">3,1</td><td class="c3">2,6</td><td class="c2">1,9</td></tr>
+    <tr><td>Automatización administrativa</td><td class="c2">2,3</td><td class="c2">2,0</td><td class="c1">1,2</td></tr>
+    <tr><td>Datos y cumplimiento</td><td class="c2">2,4</td><td class="c1">1,6</td><td class="c1">1,1</td></tr>
+    <tr><td>Liderar la adopción</td><td class="c3">3,2</td><td class="c2">2,1</td><td class="c1">—</td></tr>
+   </table></div>
+  <div class="card"><h3>Procesos del área médica con más potencial</h3><div class="h3s">De aquí salen los casos de las sesiones privadas con los mentores</div>
+   <div class="proc">
+    <div class="p"><div><b>Reportes de visitas de campo</b><small>Medical advisors · hoy manual, después de cada visita</small></div><span class="chip alto">Impacto alto</span><span class="hrs">−4 h/sem</span></div>
+    <div class="p"><div><b>Revisión de literatura científica</b><small>Gerentes y advisors · búsqueda y resumen de estudios</small></div><span class="chip alto">Impacto alto</span><span class="hrs">−3 h/sem</span></div>
+    <div class="p"><div><b>Preparación de reuniones con KOL</b><small>Advisors · contexto, preguntas y material</small></div><span class="chip alto">Impacto alto</span><span class="hrs">−2 h/sem</span></div>
+    <div class="p"><div><b>Respuestas de información médica</b><small>Con plantillas aprobadas y revisión humana</small></div><span class="chip medio">Impacto medio</span><span class="hrs">−2 h/sem</span></div>
+    <div class="p"><div><b>Reportes de gestión del área</b><small>Directora y gerentes · consolidado mensual</small></div><span class="chip medio">Impacto medio</span><span class="hrs">−1 h/sem</span></div>
+   </div>
+   <p class="note">Horas estimadas en el diagnóstico de muestra. En el real salen de las respuestas de cada persona.</p>
+   <div class="ask"><input value="" placeholder="Pregúntale al diagnóstico: ¿qué capa tiene la mayor brecha?"><button>Enviar</button></div>
+   <div class="q"><span>¿Qué proceso llevamos primero a la AI?</span><span>¿Quién puede ser champion por capa?</span><span>¿Qué reglas de datos aplican?</span></div>
+  </div>
+ </div>
+</main></div>
+</body></html>
